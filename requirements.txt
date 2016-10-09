@@ -1,0 +1,8 @@
+Flask >= 0.10.1
+Jinja2 >= 2.7.3
+Werkzeug >= 0.9.6
+gunicorn >= 19.6.0
+flask-cors >= 3.0.2
+numpy >= 1.8.2
+beautifulsoup4 >= 4.5.1
+requests>=2.2.1

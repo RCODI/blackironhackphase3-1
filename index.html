@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Travel risk evaluation</title>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Travel risk evaluator">
+    <!--[ REDACTED ]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel='stylesheet' href='static/style.css' type='text/css'>
+
+    <script type="text/javascript">
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+</head>
+
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                </button>
+                <!--            TODO should go to #home-->
+                <a class="navbar-brand" href="#"></a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav" id="myNavTabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
+                    <li role="presentation">
+                        <a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a></li>
+                    <li role="presentation">
+                        <a href="#contact" aria-controls="contact" role="tab" data-toggle="tab">Contact</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="home">
+                <h1>Travel information</h1>
+                <p class="lead">Where are you going?</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="col-md-12">
+<div>
+Three major factors that determine the risk for Zika virus are:
+<ol>
+<li>How many cases of Zika virus have been reported in the area?</li>
+<li>How populous is the area?</li>
+<li>Does the area have mosquitoes and if so, is it mosquito season?</li>
+</ol>
+          Please enter your destination and date of travel and information about the risk factors will appear below.
+</div>
+                            <form>
+                                <label for="destination">
+                                    Destination:
+                                </label>
+                                <br/>
+                                <input type=text id="destination" size="25" name="destination" title="Destination address" placeholder='e.g. "60613" or "Chicago, IL"' required>
+                                <br/>
+                                <label for="date">
+                                        Date of travel:
+                                </label>
+                                <br/>
+                                <input type="date" id="date" size="10" name="date" title="Date" pattern="^\d{2}/\d{2}/\d{4}$" placeholder="MM/DD/YYYY" required>
+                                <br/>
+                                <input type="submit" id="submit" class="disabled" title="Please fill out the required values" disabled>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 spinner"><img src="static/ajax-loader.gif" alt="loading" width=32 height=32/> </div>
+                            <div class="col-md-12" id="result">
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div id="ladder"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="map">Right panel</div>
+
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--                        Bottom panel-->
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="about">
+                <h1>About</h1>
+                
+                <h2>Data sources</h2>
+                <div class="references">
+                  <p>
+                    Centers for Disease Control and Prevention, National Center for Health Statistics. Compressed Mortality File 1999-2014 on CDC WONDER Online Database, released December 2015. Data are from the Compressed Mortality File 1999-2014 Series 20 No. 2T, 2015, as compiled from data provided by the 57 vital statistics jurisdictions through the Vital Statistics Cooperative Program. Accessed at <a href="http://wonder.cdc.gov/cmf-icd10.html">http://wonder.cdc.gov/cmf-icd10.html</a> on Oct 1, 2016.</p>
+              </div>
+                <h2>References</h2>
+                <div class="references">
+
+                    <p>Chen, S., Blanford, J. I., Fleischer, S. J., Hutchinson, M., Saunders, M. C., &amp; Thomas, M. B. (2013). Estimating West Nile Virus Transmission Period in Pennsylvania Using an Optimized Degree-Day Model. Vector Borne and Zoonotic Diseases, 13(7), 489–497. <a href="http://doi.org/10.1089/vbz.2012.1094">http://doi.org/10.1089/vbz.2012.1094</a></p>
+                    <p>Waldock, J., Chandra, N. L., Lelieveld, J., Proestos, Y., Michael, E., Christophides, G., &amp; Parham, P. E. (2013). The role of environmental variables on Aedes albopictus biology and chikungunya epidemiology. Pathogens and Global Health, 107(5), 224–241. <a href="http://doi.org/10.1179/2047773213Y.0000000100">http://doi.org/10.1179/2047773213Y.0000000100</a></p>
+                </div>
+
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="contact">
+                <h1>Contact</h1>
+                <!--[ REDACTED ]-->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDadi4nI9R8BtPsLjB8Lh31jB8kZ60hde0&libraries=places"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script type="text/javascript" src="static/script.js"></script>
+
+</body>
+
+</html>
